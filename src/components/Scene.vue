@@ -12,7 +12,7 @@ export default {
     return {};
   },
   methods: {
-    setupScene: function() {
+    setupScene() {
       // Create renderer.
       this.renderer = new THREE.WebGLRenderer({ antialias: true });
       // Set the pixel ratio.
@@ -74,12 +74,12 @@ export default {
       }
       this.scene.add(this.mesh);
     },
-    sizeRenderer: function() {
+    sizeRenderer() {
       this.camera.aspect = window.innerWidth / window.innerHeight;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(window.innerWidth, window.innerHeight);
     },
-    animate: function() {
+    animate() {
       let timer = Date.now() * 0.0005;
       this.mesh.rotation.x += 0.005;
       this.mesh.rotation.y += 0.01;
