@@ -12,17 +12,6 @@ export default {
     };
   },
   methods: {
-    startLoop() {
-      if (!this._frameId) {
-        this.loop();
-      }
-    },
-    stopLoop() {
-      window.cancelAnimationFrame(this._frameId);
-    },
-    begin() {
-      this.beginTime = (performance || Date).now();
-    },
     end() {
       this.frames++;
       let time = (performance || Date).now();
@@ -47,8 +36,10 @@ export default {
   mounted() {
     this.beginTime = this.prevTime = (performance || Date).now();
     this.frames = 0;
-    //this.loop();
-    this.startLoop();
+    this.loop();
+  },
+  beforeDestoryed() {
+    window.cancelAnimationFrame(this._frameId);
   }
 };
 </script>
