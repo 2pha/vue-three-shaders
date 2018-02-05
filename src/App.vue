@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-    <Scene/>
+    <Scene :currentShape="state.currentShape"/>
     <Stats/>
+    <Controls :shapes="shapes" :shaders="shaders" @shapeSelected="changeShape" @shaderSelected="testing"/>
   </div>
 </template>
 
@@ -10,6 +11,7 @@ import * as THREE from 'three';
 
 import Scene from './components/Scene';
 import Stats from './components/Stats';
+import Controls from './components/Controls';
 
 import basicColor from './shaders/BasicColor';
 import basicColorLights from './shaders/BasicColorLights';
@@ -32,7 +34,8 @@ export default {
   name: 'App',
   components: {
     Scene,
-    Stats
+    Stats,
+    Controls
   },
   testing: 'hmmm',
   data() {
@@ -92,7 +95,18 @@ export default {
     getShapeFromName(name) {
       return this.shapes.find(x => x.name === name);
     },
-    animateCallback() {}
+    animateCallback() {},
+    getShapeFromName(name) {
+      return this.shapes.find(x => x.name === name);
+    },
+    changeShape(shapeName) {
+      this.state.currentShape = this.getShapeFromName(shapeName);
+      //this.setState({ currentShape: this.getShapeFromName(shapeName) });
+    },
+    testing(e) {
+      console.log('testing');
+      console.log(e);
+    }
   },
   created() {
     //console.log(this);

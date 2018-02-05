@@ -11,6 +11,19 @@ export default {
   data() {
     return {};
   },
+  props: {
+    currentShape: {
+      required: true,
+      type: Object
+    }
+  },
+  watch: {
+    currentShape(newVal, oldVal) {
+      if (newVal.class !== oldVal.class) {
+        this.addMesh();
+      }
+    }
+  },
   methods: {
     setupScene() {
       // Create renderer.
@@ -54,24 +67,27 @@ export default {
       //this.mesh = new THREE.Mesh(this.geometry, this.material);
       //this.scene.add(this.mesh);
 
+      //this.addMesh(this.currentShape);
       this.addMesh();
 
       // Add resize listener.
       window.addEventListener('resize', this.sizeRenderer.bind(this), false);
     },
-    addMesh(shapeOb = null) {
+    addMesh() {
       // remove previous mesh.
       if (Boolean(this.mesh)) {
         this.scene.remove(this.mesh);
       }
       // Add new mesh, default if no shapeOb.
-      if (!Boolean(shapeOb)) {
-        this.geometry = new THREE.BoxGeometry(200, 200, 200, 50, 50, 50);
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
-      } else {
-        this.geometry = new THREE[shapeOb.class](...shapeOb.args);
-        this.mesh = new THREE.Mesh(this.geometry, this.material);
-      }
+      //
+      //if (!Boolean(shapeOb)) {
+      //this.geometry = new THREE.BoxGeometry(200, 200, 200, 50, 50, 50);
+      //this.mesh = new THREE.Mesh(this.geometry, this.material);
+      //} else {
+      let shapeOb = this.currentShape;
+      this.geometry = new THREE[shapeOb.class](...shapeOb.args);
+      this.mesh = new THREE.Mesh(this.geometry, this.material);
+      //}
       this.scene.add(this.mesh);
     },
     sizeRenderer() {
