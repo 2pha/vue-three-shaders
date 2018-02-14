@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Scene :currentShape="state.currentShape"/>
+    <Scene :currentShape="state.currentShape" :currentShader="state.currentShader"/>
     <Stats/>
-    <Controls :shapes="shapes" :shaders="shaders" @shapeSelected="changeShape" @shaderSelected="testing"/>
+    <Controls :shapes="shapes" :shaders="shaders" @shapeSelected="changeShape" @shaderSelected="setShaderFromName"/>
   </div>
 </template>
 
@@ -91,7 +91,39 @@ export default {
     };
   },
   methods: {
-    setShaderFromName() {},
+    getShaderFromName(name) {
+      return this.shaders.find(x => x.name === name);
+    },
+    setShaderFromName(name) {
+      console.log(name);
+      let shader = this.getShaderFromName(name);
+      //create the options object to send to ShaderMaterial.
+      let shaderObject = {
+        vertexShader: shader.vertexShader,
+        fragmentShader: shader.fragmentShader,
+        lights: true
+      };
+      // Add uniforms if present.
+      if ('uniforms' in shader) {
+        // Using UniformUtils will clone the shader files uniforms,
+        shaderObject.uniforms = THREE.UniformsUtils.merge([
+          THREE.UniformsLib['lights'],
+          shader.uniforms
+        ]);
+      }
+      // Set this new material on the mesh.
+      let material = new THREE.ShaderMaterial(shaderObject);
+      // add the original uniforms here so we can loop over them in the Controls, because other uniforms are added that we don't want controls for.
+      material.customUniforms = shader.uniforms;
+
+      //this.state.currentShader = material;
+      //this.state.currentShaderObject = shader;
+      this.state = Object.assign(this.state, {
+        currentShader: material,
+        currentShaderObject: shader
+      });
+      //this.setState({ currentShader: material, currentShaderObject: shader });
+    },
     getShapeFromName(name) {
       return this.shapes.find(x => x.name === name);
     },
@@ -102,10 +134,6 @@ export default {
     changeShape(shapeName) {
       this.state.currentShape = this.getShapeFromName(shapeName);
       //this.setState({ currentShape: this.getShapeFromName(shapeName) });
-    },
-    testing(e) {
-      console.log('testing');
-      console.log(e);
     }
   },
   created() {

@@ -15,6 +15,10 @@ export default {
     currentShape: {
       required: true,
       type: Object
+    },
+    currentShader: {
+      required: true,
+      type: Object
     }
   },
   watch: {
@@ -22,6 +26,9 @@ export default {
       if (newVal.class !== oldVal.class) {
         this.addMesh();
       }
+    },
+    currentShader(newVal, oldVal) {
+      this.mesh.material = newVal;
     }
   },
   methods: {

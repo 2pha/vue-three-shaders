@@ -1,13 +1,20 @@
 <template>
-  <select v-on:change="handleSelect">
-    <option v-bind:key="index" v-for="(option, index) in listOptions">{{option}}</option>
-  </select>
+  <div>
+    <div>{{label}}</div>
+    <select v-on:change="handleSelect">
+      <option v-bind:key="index" v-for="(option, index) in listOptions">{{option}}</option>
+    </select>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'guiSelect',
-  props: { options: { type: Array }, onChange: { type: Function } },
+  props: {
+    label: { type: String },
+    options: { type: Array },
+    onChange: { type: Function }
+  },
   computed: {
     listOptions() {
       return this.options;

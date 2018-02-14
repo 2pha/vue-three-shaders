@@ -1,7 +1,7 @@
 <template>
   <div id="controls" style="color: #fff">
-    <gui-select :options="shapeNames" @optionSelected="shapeSelected"/>
-    <gui-select :options="shaderNames" @optionSelected="shaderSelected"/>
+    <gui-select label="Shape" :options="shapeNames" @optionSelected="shapeSelected"/>
+    <gui-select label="Shader" :options="shaderNames" @optionSelected="shaderSelected"/>
   </div>
 </template>
 
@@ -15,11 +15,8 @@ export default {
   },
   props: {
     shapes: { type: Array, required: true },
-    onShapeSelect: { type: Function },
     shaders: { type: Array, required: true },
-    currentShader: { type: Object },
-    onShaderSelect: { type: Function },
-    onCodeButtonClick: { type: Function }
+    currentShader: { type: Object }
   },
   computed: {
     shapeNames() {
