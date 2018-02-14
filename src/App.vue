@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Scene :currentShape="state.currentShape" :currentShader="state.currentShader"/>
+    <Scene :currentShape="state.currentShape" :currentShader="state.currentShader"  @animate="animateCallback"/>
     <Stats/>
     <Controls :shapes="shapes" :shaders="shaders" @shapeSelected="changeShape" @shaderSelected="setShaderFromName"/>
   </div>
@@ -127,7 +127,17 @@ export default {
     getShapeFromName(name) {
       return this.shapes.find(x => x.name === name);
     },
-    animateCallback() {},
+    animateCallback() {
+      if (
+        Boolean(this.state.currentShaderObject) &&
+        Boolean(this.state.currentShaderObject.update)
+      ) {
+        this.state.currentShaderObject.update(
+          this.state.currentShader.uniforms,
+          this.clock
+        );
+      }
+    },
     getShapeFromName(name) {
       return this.shapes.find(x => x.name === name);
     },

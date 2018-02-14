@@ -116,6 +116,7 @@ export default {
       // if (typeof this.props.onAnimate === 'function') {
       //   this.props.onAnimate();
       // }
+      this.$emit('animate');
 
       this.renderer.render(this.scene, this.camera);
       requestAnimationFrame(this.animate.bind(this));
