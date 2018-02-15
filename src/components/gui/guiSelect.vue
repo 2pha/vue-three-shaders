@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>{{label}}</div>
+    <div class="gui-label">{{label}}</div>
     <select v-on:change="handleSelect">
       <option v-bind:key="index" v-for="(option, index) in listOptions">{{option}}</option>
     </select>

@@ -2,7 +2,7 @@
   <div id="app">
     <Scene :currentShape="state.currentShape" :currentShader="state.currentShader"  @animate="animateCallback"/>
     <Stats/>
-    <Controls :shapes="shapes" :shaders="shaders" @shapeSelected="changeShape" @shaderSelected="setShaderFromName"/>
+    <Controls :shapes="shapes" :shaders="shaders" :currentShader="state.currentShader" @shapeSelected="changeShape" @shaderSelected="setShaderFromName"/>
   </div>
 </template>
 
@@ -37,7 +37,6 @@ export default {
     Stats,
     Controls
   },
-  testing: 'hmmm',
   data() {
     return {
       shaders: [
@@ -146,8 +145,8 @@ export default {
       //this.setState({ currentShape: this.getShapeFromName(shapeName) });
     }
   },
-  created() {
-    //console.log(this);
+  mounted() {
+    this.setShaderFromName('Basic Color');
   }
 };
 </script>
