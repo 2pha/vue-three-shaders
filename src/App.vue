@@ -94,7 +94,6 @@ export default {
       return this.shaders.find(x => x.name === name);
     },
     setShaderFromName(name) {
-      console.log(name);
       let shader = this.getShaderFromName(name);
       //create the options object to send to ShaderMaterial.
       let shaderObject = {

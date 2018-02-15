@@ -4,7 +4,7 @@
     <gui-select label="Shader" :options="shaderNames" @optionSelected="shaderSelected"/>
     <div v-bind:key="key" v-for="(uniform, key) in customUniforms">
       <!-- Have to use v-bind (:) here so a number is passed to props instead of string. https://vuejs.org/v2/guide/components.html#Literal-vs-Dynamic -->
-      <gui-number-range v-if="uniform.type == 'f'" :label="key" :value="uniform.value" :min="uniform.min" :max="uniform.max" :step="uniform.step" v-on:change="numberUniformChange"/>
+      <gui-number-range v-if="uniform.type == 'f' && !Boolean(uniform.hidden)" :label="key" :value="uniform.value" :min="uniform.min" :max="uniform.max" :step="uniform.step" v-on:change="numberUniformChange"/>
     </div>
   </div>
 </template>
@@ -47,9 +47,6 @@ export default {
       this.$emit('shaderSelected', value);
     },
     numberUniformChange(key, value) {
-      //console.log(key);
-      //console.log(value);
-      //console.log(this.currentShader);
       this.currentShader.uniforms[key].value = value;
     }
   }

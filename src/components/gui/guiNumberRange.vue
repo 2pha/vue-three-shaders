@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="gui-label">{{label}}</div>
-    <input type="range" :value="value" :min="min" :max="max" :step="step" v-on:input="valueChange"/>
+    <input ref="range" type="range" :value="value" :min="min" :max="max" :step="step" v-on:input="valueChange"/>
+    <input ref="text" type="text" :value="value" v-on:change="valueChange"/>
   </div>
 </template>
 
@@ -17,8 +18,17 @@ export default {
   },
   methods: {
     valueChange(e) {
-      //console.log(e);
-      this.$emit('change', this.label, e.target.value);
+      let newval = parseFloat(e.target.value);
+      if (isNaN(newval)) {
+        return;
+      }
+      if (newval < this.min) {
+        newval = this.min;
+      } else if (newval > this.max) {
+        newval = this.max;
+      }
+      this.$refs.range.value = this.$refs.text.value = newval;
+      this.$emit('change', this.label, newval);
     }
   }
 };

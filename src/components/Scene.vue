@@ -113,9 +113,6 @@ export default {
       this.light2.position.y = Math.cos(timer * 1.25) * 250;
       this.light2.position.z = Math.sin(timer * 1.25) * 250;
 
-      // if (typeof this.props.onAnimate === 'function') {
-      //   this.props.onAnimate();
-      // }
       this.$emit('animate');
 
       this.renderer.render(this.scene, this.camera);
@@ -123,10 +120,8 @@ export default {
     }
   },
   mounted() {
-    //console.log('mounted');
     this.setupScene();
     this.sizeRenderer();
-    //console.log(this.$refs);
     this.$refs.scenecontainer.appendChild(this.renderer.domElement);
     this.animate();
   }
