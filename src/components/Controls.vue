@@ -5,6 +5,7 @@
     <div v-bind:key="key" v-for="(uniform, key) in customUniforms">
       <!-- Have to use v-bind (:) here so a number is passed to props instead of string. https://vuejs.org/v2/guide/components.html#Literal-vs-Dynamic -->
       <gui-number-range v-if="uniform.type == 'f' && !Boolean(uniform.hidden)" :label="key" :value="uniform.value" :min="uniform.min" :max="uniform.max" :step="uniform.step" v-on:change="numberUniformChange"/>
+      <gui-color v-if="uniform.type == 'c' && !Boolean(uniform.hidden)" :label="key" :red="parseInt(uniform.value.r * 256, 10)" :green="parseInt(uniform.value.g * 256, 10)" :blue="parseInt(uniform.value.b * 256, 10)" v-on:change="colorUniformChange" />
     </div>
   </div>
 </template>
@@ -12,12 +13,14 @@
 <script>
 import guiSelect from './gui/guiSelect';
 import guiNumberRange from './gui/guiNumberRange';
+import guiColor from './gui/guiColor';
 
 export default {
   name: 'Controls',
   components: {
     guiSelect,
-    guiNumberRange
+    guiNumberRange,
+    guiColor
   },
   props: {
     shapes: { type: Array, required: true },
@@ -48,6 +51,15 @@ export default {
     },
     numberUniformChange(key, value) {
       this.currentShader.uniforms[key].value = value;
+    },
+    colorUniformChange(key, value) {
+      //console.log('color');
+      //console.log(value);
+      this.currentShader.uniforms[key].value.setRGB(
+        value.red / 256,
+        value.green / 256,
+        value.blue / 256
+      );
     }
   }
 };

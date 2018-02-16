@@ -1,0 +1,97 @@
+<template>
+  <div>
+    <div class="gui-label">{{label}}</div>
+    <div v-on:click="toggleExpanded" :style="colorBackgroundStyle">{{state.red}}, {{state.green}}, {{state.blue}}</div>
+    <div :class="{ closed: !state.expanded }">
+      <gui-number-range label="red" v-on:change="colorInputChange" :value="state.red" :min="0" :max="255" :step="1.0" />
+      <gui-number-range label="green" v-on:change="colorInputChange" :value="state.green" :min="0" :max="255" :step="1.0" />
+      <gui-number-range label="blue" v-on:change="colorInputChange" :value="state.blue" :min="0" :max="255" :step="1.0" />
+    </div>
+  </div>
+</template>
+
+<script>
+import guiNumberRange from './guiNumberRange';
+
+export default {
+  name: 'Color',
+  components: {
+    guiNumberRange
+  },
+  data() {
+    return {
+      state: {
+        expanded: false,
+        red: 0,
+        green: 0,
+        blue: 0
+      }
+    };
+  },
+  props: {
+    label: { type: String, default: '' },
+    red: { type: Number, default: 0 },
+    green: { type: Number, default: 0 },
+    blue: { type: Number, default: 0 }
+  },
+  watch: {
+    red: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        if (newVal !== this.state.red) {
+          this.state.red = newVal;
+        }
+      }
+    },
+    green: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        if (newVal !== this.state.green) {
+          this.state.green = newVal;
+        }
+      }
+    },
+    blue: {
+      immediate: true,
+      handler(newVal, oldVal) {
+        if (newVal !== this.state.blue) {
+          this.state.blue = newVal;
+        }
+      }
+    }
+  },
+  computed: {
+    colorBackgroundStyle() {
+      return {
+        background: `rgb(
+          ${this.state.red},
+          ${this.state.green},
+          ${this.state.blue})`
+      };
+    }
+  },
+  methods: {
+    colorInputChange(col, newval) {
+      if (this.state[col] !== newval) {
+        this.state[col] = newval;
+        this.$emit('change', this.label, {
+          red: this.state.red,
+          green: this.state.green,
+          blue: this.state.blue
+        });
+      }
+    },
+    toggleExpanded() {
+      this.state.expanded = !this.state.expanded;
+    }
+  }
+};
+</script>
+
+<style scoped>
+.closed {
+  display: none;
+}
+</style>
+
+

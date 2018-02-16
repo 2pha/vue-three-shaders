@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'NumberRange',
+  name: 'guiNumberRange',
   props: {
     label: { type: String, default: '' },
     value: { type: Number, default: 0 },
