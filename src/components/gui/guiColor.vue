@@ -1,8 +1,10 @@
 <template>
   <div>
     <div class="gui-label">{{label}}</div>
-    <div v-on:click="toggleExpanded" :style="colorBackgroundStyle">{{state.red}}, {{state.green}}, {{state.blue}}</div>
-    <div :class="{ closed: !state.expanded }">
+    <div class="gui-controller">
+      <div v-on:click="toggleExpanded" :style="colorBackgroundStyle">{{state.red}}, {{state.green}}, {{state.blue}}</div>
+    </div>
+    <div class="gui-color-sliders" :class="{ closed: !state.expanded }">
       <gui-number-range label="red" v-on:change="colorInputChange" :value="state.red" :min="0" :max="255" :step="1.0" />
       <gui-number-range label="green" v-on:change="colorInputChange" :value="state.green" :min="0" :max="255" :step="1.0" />
       <gui-number-range label="blue" v-on:change="colorInputChange" :value="state.blue" :min="0" :max="255" :step="1.0" />

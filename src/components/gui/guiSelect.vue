@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="gui-label">{{label}}</div>
-    <select v-on:change="handleSelect">
-      <option v-bind:key="index" v-for="(option, index) in listOptions">{{option}}</option>
-    </select>
+    <div class="gui-controller">
+      <select v-on:change="handleSelect">
+        <option v-bind:key="index" v-for="(option, index) in listOptions">{{option}}</option>
+      </select>
+    </div>
   </div>
 </template>
 

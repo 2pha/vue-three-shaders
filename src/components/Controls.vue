@@ -65,10 +65,25 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #controls {
-  position: absolute;
+  position: fixed;
   right: 0px;
   top: 0px;
+  font-size: 11px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: normal;
 }
+#controls > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+/* #controls>>>.gui-label {
+  flex: 0 0 100px;
+}
+#controls>>>.gui-controller {
+  flex: 1 0 auto;
+} */
 </style>

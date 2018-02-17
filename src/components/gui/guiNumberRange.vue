@@ -1,8 +1,10 @@
 <template>
   <div>
     <div class="gui-label">{{label}}</div>
-    <input ref="range" type="range" :value="value" :min="min" :max="max" :step="step" v-on:input="valueChange"/>
-    <input ref="text" type="text" :value="value" v-on:change="valueChange"/>
+    <div class="gui-controller">
+      <input ref="range" type="range" :value="value" :min="min" :max="max" :step="step" v-on:input="valueChange"/>
+      <input ref="text" type="text" :value="value" v-on:change="valueChange"/>
+    </div>
   </div>
 </template>
 
@@ -33,5 +35,13 @@ export default {
   }
 };
 </script>
+
+<style>
+/* .gui-number-range {
+  display: flex;
+} */
+</style>
+
+
 
 
