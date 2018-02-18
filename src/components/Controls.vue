@@ -53,8 +53,6 @@ export default {
       this.currentShader.uniforms[key].value = value;
     },
     colorUniformChange(key, value) {
-      //console.log('color');
-      //console.log(value);
       this.currentShader.uniforms[key].value.setRGB(
         value.red / 256,
         value.green / 256,
@@ -68,22 +66,44 @@ export default {
 <style>
 #controls {
   position: fixed;
-  right: 0px;
+  right: 8px;
   top: 0px;
   font-size: 11px;
   font-family: Arial, Helvetica, sans-serif;
   line-height: normal;
 }
-#controls > div {
+input,
+select {
+  background-color: rgb(68, 68, 68);
+  border: none;
+  outline: none;
+  color: rgb(0, 255, 170);
+  font-size: 11px;
+  line-height: 18;
+  font-family: Arial;
+  height: 18px;
+  user-select: none;
+  cursor: pointer;
+}
+.gui-item {
+  border-bottom: 1px solid rgb(51, 51, 51);
+  background-color: rgb(26, 26, 26);
+  min-height: 24px;
+  padding: 3px;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  flex-flow: row wrap;
+  align-items: center;
 }
-
-/* #controls>>>.gui-label {
-  flex: 0 0 100px;
+.gui-label {
+  width: 96px;
+  padding: 3px;
+  color: rgb(255, 255, 255);
+  cursor: default;
+  user-select: none;
 }
-#controls>>>.gui-controller {
-  flex: 1 0 auto;
-} */
+.gui-controller {
+  width: 192px;
+  color: rgb(0, 255, 170);
+}
 </style>

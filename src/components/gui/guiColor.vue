@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="gui-item gui-color">
     <div class="gui-label">{{label}}</div>
     <div class="gui-controller">
-      <div @click="toggleExpanded" :style="colorBackgroundStyle">{{state.red}}, {{state.green}}, {{state.blue}}</div>
-    </div>
-    <div class="gui-color-sliders" :class="{ closed: !state.expanded }">
-      <gui-number-range label="red" @change="colorInputChange" :value="state.red" :min="0" :max="255" :step="1.0" />
-      <gui-number-range label="green" @change="colorInputChange" :value="state.green" :min="0" :max="255" :step="1.0" />
-      <gui-number-range label="blue" @change="colorInputChange" :value="state.blue" :min="0" :max="255" :step="1.0" />
+      <div @click="toggleExpanded" class="gui-color-toggle" :style="colorBackgroundStyle">{{state.red}}, {{state.green}}, {{state.blue}}</div>
+      <div class="gui-color-sliders" :class="{ closed: !state.expanded }">
+        <gui-number-range label="red" @change="colorInputChange" :value="state.red" :min="0" :max="255" :step="1.0" />
+        <gui-number-range label="green" @change="colorInputChange" :value="state.green" :min="0" :max="255" :step="1.0" />
+        <gui-number-range label="blue" @change="colorInputChange" :value="state.blue" :min="0" :max="255" :step="1.0" />
+      </div>
     </div>
   </div>
 </template>
@@ -93,6 +93,18 @@ export default {
 <style scoped>
 .closed {
   display: none;
+}
+.gui-color-toggle {
+  font-size: 11px;
+  line-height: 18px;
+  height: 18px;
+  width: 100%;
+  text-align: center;
+  color: white;
+  text-shadow: black 0px 0px 4px, black 0px 0px 4px, black 0px 0px 4px,
+    black 0px 0px 4px, black 0px 0px 4px;
+  cursor: pointer;
+  user-select: none;
 }
 </style>
 

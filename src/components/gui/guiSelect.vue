@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="gui-item gui-select">
     <div class="gui-label">{{label}}</div>
     <div class="gui-controller">
       <select v-on:change="handleSelect">
@@ -24,10 +24,7 @@ export default {
   },
   methods: {
     handleSelect(e) {
-      //if (this.props.onChange) {
-      //this.props.onChange(e.target.value);
       this.$emit('optionSelected', e.target.value);
-      //}
     }
   }
 };
