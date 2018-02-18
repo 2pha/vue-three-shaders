@@ -2,8 +2,8 @@
   <div>
     <div class="gui-label">{{label}}</div>
     <div class="gui-controller">
-      <input ref="range" type="range" :value="value" :min="min" :max="max" :step="step" v-on:input="valueChange"/>
-      <input ref="text" type="text" :value="value" v-on:change="valueChange"/>
+      <input ref="range" type="range" :value="value" :min="min" :max="max" :step="step" @input="valueChange"/>
+      <input ref="text" type="text" :value="value" @change="valueChange"/>
     </div>
   </div>
 </template>
