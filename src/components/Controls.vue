@@ -7,6 +7,7 @@
       <gui-number-range v-if="uniform.type == 'f' && !Boolean(uniform.hidden)" :label="key" :value="uniform.value" :min="uniform.min" :max="uniform.max" :step="uniform.step" v-on:change="numberUniformChange"/>
       <gui-color v-if="uniform.type == 'c' && !Boolean(uniform.hidden)" :label="key" :red="parseInt(uniform.value.r * 256, 10)" :green="parseInt(uniform.value.g * 256, 10)" :blue="parseInt(uniform.value.b * 256, 10)" v-on:change="colorUniformChange" />
     </div>
+    <gui-button label="view shader code" @click="codeButtonClick"/>
   </div>
 </template>
 
@@ -14,13 +15,15 @@
 import guiSelect from './gui/guiSelect';
 import guiNumberRange from './gui/guiNumberRange';
 import guiColor from './gui/guiColor';
+import guiButton from './gui/guiButton';
 
 export default {
   name: 'Controls',
   components: {
     guiSelect,
     guiNumberRange,
-    guiColor
+    guiColor,
+    guiButton
   },
   props: {
     shapes: { type: Array, required: true },
@@ -58,6 +61,9 @@ export default {
         value.green / 256,
         value.blue / 256
       );
+    },
+    codeButtonClick(e) {
+      this.$emit('codeButtonClick', e);
     }
   }
 };

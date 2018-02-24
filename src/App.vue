@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <Scene :currentShape="state.currentShape" :currentShader="state.currentShader"  @animate="animateCallback"/>
-    <Stats/>
-    <Controls :shapes="shapes" :shaders="shaders" :currentShader="state.currentShader" @shapeSelected="changeShape" @shaderSelected="setShaderFromName"/>
+    <scene :currentShape="state.currentShape" :currentShader="state.currentShader"  @animate="animateCallback"/>
+    <stats/>
+    <controls :shapes="shapes" :shaders="shaders" :currentShader="state.currentShader" @shapeSelected="changeShape" @shaderSelected="setShaderFromName" @codeButtonClick="showCode(true)"/>
+    <code-view @close="showCode(false)" :visible="state.showCode" :shaderName="state.currentShaderObject.name" :vertexShader="state.currentShaderObject.vertexShader" :fragmentShader="state.currentShaderObject.fragmentShader"></code-view>
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import * as THREE from 'three';
 import Scene from './components/Scene';
 import Stats from './components/Stats';
 import Controls from './components/Controls';
+import CodeView from './components/CodeView';
 
 import basicColor from './shaders/BasicColor';
 import basicColorLights from './shaders/BasicColorLights';
@@ -35,7 +37,8 @@ export default {
   components: {
     Scene,
     Stats,
-    Controls
+    Controls,
+    CodeView
   },
   data() {
     return {
@@ -142,6 +145,9 @@ export default {
     changeShape(shapeName) {
       this.state.currentShape = this.getShapeFromName(shapeName);
       //this.setState({ currentShape: this.getShapeFromName(shapeName) });
+    },
+    showCode(show = false) {
+      this.state.showCode = show;
     }
   },
   mounted() {
