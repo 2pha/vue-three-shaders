@@ -3,12 +3,33 @@
     <scene :currentShape="state.currentShape" :currentShader="state.currentShader"  @animate="animateCallback"/>
     <stats/>
     <controls :shapes="shapes" :shaders="shaders" :currentShader="state.currentShader" @shapeSelected="changeShape" @shaderSelected="setShaderFromName" @codeButtonClick="showCode(true)"/>
+    <div id="info">
+          Three.js ShaderMaterial experiments.<br />
+          Originals at
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://2pha.com/blog/experimenting-threejs-shaders-and-shadermaterial/"
+          >
+            this blog post
+          </a>
+          <br />
+          Build with Three.js {{this.threeVersion}} and Vue.js<br />
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/2pha/vue-three-shaders"
+          >
+            https://github.com/2pha/vue-three-shaders
+          </a>
+        </div>
     <code-view @close="showCode(false)" :visible="state.showCode" :shaderName="state.currentShaderObject.name" :vertexShader="state.currentShaderObject.vertexShader" :fragmentShader="state.currentShaderObject.fragmentShader"></code-view>
   </div>
 </template>
 
 <script>
 import * as THREE from 'three';
+import * as Vue from 'vue';
 
 import Scene from './components/Scene';
 import Stats from './components/Stats';
@@ -168,5 +189,18 @@ canvas {
 }
 div {
   box-sizing: border-box;
+}
+
+#info {
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 12px;
+  line-height: 16px;
+  color: #fff;
+}
+#info a {
+  color: #fff;
 }
 </style>

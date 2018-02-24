@@ -2,9 +2,17 @@
 
 > A Vue.js project
 
+Just an experiment with vue.js, three.js and shaders. This is my first time using vue.js.
+
+View the build [HERE](https://2pha.github.io/vue-three-shaders/build/)
+
+recreation in vue od the react version [HERE](https://github.com/2pha/react-three-shaders)
+
+It implements some of the shaders from [this blog post](https://2pha.com/blog/experimenting-threejs-shaders-and-shadermaterial/) in a vue app.
+
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
