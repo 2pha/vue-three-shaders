@@ -4,7 +4,7 @@
 
 Just an experiment with vue.js, three.js and shaders. This is my first time using vue.js.
 
-View the build [HERE](https://2pha.github.io/vue-three-shaders/build/)
+View the build [HERE](https://2pha.github.io/vue-three-shaders/dist/)
 
 recreation in vue od the react version [HERE](https://github.com/2pha/react-three-shaders)
 
