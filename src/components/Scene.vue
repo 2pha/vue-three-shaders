@@ -25,6 +25,7 @@ export default {
     currentShape(newVal, oldVal) {
       if (newVal.class !== oldVal.class) {
         this.addMesh();
+        this.mesh.material = this.currentShader;
       }
     },
     currentShader(newVal, oldVal) {
